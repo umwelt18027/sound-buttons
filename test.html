@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>버튼으로 음악 재생</title>
+  <style>
+    .sound-button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="sound-button" id="btn1">안녕</button>
+  <button class="sound-button" id="btn2">고마워</button>
+  <button class="sound-button" id="btn3">버즈</button>
+  <button class="sound-button" id="btn4">시작</button>
+  <button class="sound-button" id="btn5">끝</button>
+
+  <script>
+    // 버튼에 랜덤 색상 부여
+    const buttons = document.querySelectorAll('.sound-button');
+    buttons.forEach(button => {
+      button.style.backgroundColor = getRandomColor();
+    });
+
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // 버튼별 음원 파일 경로 지정
+    const soundMap = {
+      'btn1': 'hello.mp3',
+      'btn2': 'thanks.mp3',
+      'btn3': 'buzz.mp3',
+      'btn4': 'start.mp3',
+      'btn5': 'end.mp3'
+    };
+
+    // 클릭 시 음원 재생
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const soundFile = soundMap[button.id];
+        const audio = new Audio(soundFile);
+        audio.play();
+      });
+    });
+  </script>
+
+</body>
+</html>
